@@ -16,13 +16,18 @@ angular.module('GooglePickerExample', ['lk-google-picker'])
 })
 
 .controller('ExampleCtrl', ['$scope', 'lkGoogleSettings', function($scope, lkGoogleSettings) {
-  $scope.files     = [];
+  $scope.files        = [];
+  $scope.callback     = function(files) {
+    angular.forEach(files, function(file, index) {
+      $scope.files.push(file);
+    });
+  };
   $scope.languages = [
     { code: 'en', name: 'English' },
     { code: 'fr', name: 'Français' },
     { code: 'ja', name: '日本語' },
     { code: 'ko', name: '한국' },
-  ]
+  ];
 
   // Check for the current language depending on lkGoogleSettings.locale
   $scope.initialize = function() {
@@ -31,10 +36,10 @@ angular.module('GooglePickerExample', ['lk-google-picker'])
         $scope.selectedLocale = $scope.languages[index];
       }
     });
-  }
+  };
 
   // Define the locale to use
   $scope.changeLocale = function(locale) {
     lkGoogleSettings.locale = locale.code;
-  }
+  };
 }]);

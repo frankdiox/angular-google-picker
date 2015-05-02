@@ -34,7 +34,7 @@ angular.module('lk-google-picker', [])
       views    : this.views,
       locale   : this.locale,
       origin   : this.origin || $window.location.protocol + '//' + $window.location.host
-    }
+    };
   }];
 
   /**
@@ -51,7 +51,6 @@ angular.module('lk-google-picker', [])
   return {
     restrict: 'A',
     scope: {
-      pickerFiles: '=',
       pickerCallback: '='
     },
     link: function(scope, element, attrs) {
@@ -99,7 +98,6 @@ angular.module('lk-google-picker', [])
       function openDialog() {
         var picker = new google.picker.PickerBuilder()
                                .setLocale(lkGoogleSettings.locale)
-                               // .setDeveloperKey(lkGoogleSettings.apiKey)
                                .setOAuthToken(accessToken)
                                .setCallback(pickerResponse)
                                .setOrigin(lkGoogleSettings.origin);
@@ -127,10 +125,7 @@ angular.module('lk-google-picker', [])
       function pickerResponse(data) {
         if (data.action == google.picker.Action.PICKED) {
           gapi.client.load('drive', 'v2', function() {
-            angular.forEach(data.docs, function(file, index) {
-              scope.pickerFiles.push(file);
-            });
-            scope.pickerCallback(scope.pickerFiles);
+            scope.pickerCallback(data.docs);
             scope.$apply();
           });
         }
@@ -143,5 +138,5 @@ angular.module('lk-google-picker', [])
         instanciate();
       });
     }
-  }
+  };
 }]);
