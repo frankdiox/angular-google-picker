@@ -2,8 +2,8 @@ angular-google-picker
 =====================
 
 Angular directive that interact with the Google API Picker :
-* [https://developers.google.com/picker/docs/](https://developers.google.com/picker/)
-* [https://developers.google.com/picker/docs/](https://developers.google.com/picker/docs/)
+* [Google API Picker Overview](https://developers.google.com/picker/)
+* [Google API Picker Docs](https://developers.google.com/picker/docs/)
 
 **Requirements:** AngularJS 1.2+
 
@@ -15,18 +15,18 @@ Angular directive that interact with the Google API Picker :
 1. Using Bower (recommended)
 
   ```Bash
-  bower install angular-google-picker --save
+  bower install https://github.com/frankdiox/angular-google-picker.git --save
   ```
 
 2. Using NPM
 
   ```bash
-  npm install angular-google-picker --save
+  npm install https://github.com/frankdiox/angular-google-picker.git --save
   ```
 
 3. Manually
 
-Download [https://github.com/softmonkeyjapan/angular-google-picker/archive/0.1.3.zip](https://github.com/softmonkeyjapan/angular-google-picker/archive/0.1.3.zip)
+Download [https://github.com/frankdiox/angular-google-picker/archive/0.2.0.zip](https://github.com/frankdiox/angular-google-picker/archive/0.2.0.zip)
 
 
 # Usage
@@ -52,20 +52,26 @@ Download [https://github.com/softmonkeyjapan/angular-google-picker/archive/0.1.3
   angular.module('myApp', ['lk-google-picker'])
 
   .controller('ExamplaCtrl', ['$scope', function($scope) {
-     $scope.files = [];
+    $scope.myCallback = function(data) {
+      if (data.action === 'picked') {
+        console.log('Files: ', data.docs);
+      } else if (data.action === 'cancel') {
+        console.log('Request canceled');
+      }
+    };
   }]);
   ```
 
 5. Add the directive to your HTML element
 
   ```html
-  <a href="javascript:;" lk-google-picker picker-files="files">Open my Google Drive</a>
+  <a href="javascript:;" lk-google-picker picker-callback="myCallback">Open my Google Drive</a>
   ```
 
 6. That's it, you're done!
 
 
-You'll notice here the usage of `picker-files`. You need to pass here a scope that gonna receive the selected files. Once selected, the plugin gonna push files into it. A file is a json object that looks like :
+You'll notice here the usage of `picker-callback`. You need to pass here a callback that will handle the data received. The callback receives a "data" object that contains an "action" member with the values "picked" or "canceled" depending on the user action. The "docs" member will contain an array with the selected files. Every file is a json object that looks like :
 
   ```json
   [
@@ -164,7 +170,7 @@ Please refer to [https://developers.google.com/picker/docs/reference](https://de
 
 # Example
 
-The demo version available at [http://softmonkeyjapan.github.io/angular-google-picker/](http://softmonkeyjapan.github.io/angular-google-picker/) can be found in the `example` folder.
+The demo version available at [http://frankdiox.github.io/angular-google-picker/](http://frankdiox.github.io/angular-google-picker/) can be found in the `example` folder.
 You will need a server in order to try it on your local machine. Since the Google Picker demo application is setup to allow origin from localhost:8000, I encourage you to use the python `SimpleHTTPServer` :
 
 ```shell
@@ -178,7 +184,7 @@ You should now be able to browse to `localhost:8000` and see it in action from y
 
 # Demo
 
-A demo version is available at [http://softmonkeyjapan.github.io/angular-google-picker/](http://softmonkeyjapan.github.io/angular-google-picker/).
+A demo version is available at [http://frankdiox.github.io/angular-google-picker/](http://frankdiox.github.io/angular-google-picker/).
 
 
 # License

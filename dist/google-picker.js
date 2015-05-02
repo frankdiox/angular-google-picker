@@ -123,12 +123,10 @@ angular.module('lk-google-picker', [])
        * data: Object returned by the API
        */
       function pickerResponse(data) {
-        if (data.action == google.picker.Action.PICKED) {
-          gapi.client.load('drive', 'v2', function() {
-            scope.pickerCallback(data.docs);
-            scope.$apply();
-          });
-        }
+        gapi.client.load('drive', 'v2', function() {
+          scope.pickerCallback(data);
+          scope.$apply();
+        });
       }
 
       gapi.load('auth');

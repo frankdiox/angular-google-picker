@@ -17,10 +17,14 @@ angular.module('GooglePickerExample', ['lk-google-picker'])
 
 .controller('ExampleCtrl', ['$scope', 'lkGoogleSettings', function($scope, lkGoogleSettings) {
   $scope.files        = [];
-  $scope.callback     = function(files) {
-    angular.forEach(files, function(file, index) {
-      $scope.files.push(file);
-    });
+  $scope.callback     = function(data) {
+    if (data.action === 'picked') {
+      angular.forEach(data.docs, function(file, index) {
+        $scope.files.push(file);
+      });
+    } else if (data.action === 'cancel') {
+      console.log('Request canceled');
+    }
   };
   $scope.languages = [
     { code: 'en', name: 'English' },

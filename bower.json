@@ -1,8 +1,9 @@
 {
   "name": "angular-google-picker",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "authors": [
-    "Loic Kartono <contact@kartono-loic.com>"
+    "Loic Kartono <contact@kartono-loic.com>",
+    "Fran Dios <me@frandiox.com>"
   ],
   "description": "An AngularJs directive that interact with the Google Picker API",
   "main": "dist/google-picker.js",
@@ -13,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/softmonkeyjapan/angular-google-picker.git"
+    "url": "git://github.com/frankdiox/angular-google-picker.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/softmonkeyjapan/angular-google-picker",
+  "homepage": "https://github.com/frankdiox/angular-google-picker",
   "ignore": [
     "**/.*",
     "node_modules",
